@@ -17,6 +17,8 @@ const Checkout = () => {
   const Navigate = useNavigate();
   const [checkout, setCheckout] = useState();
 
+  // const url = "http://localhost:4545/api/products/images";
+
   const token = localStorage.getItem("token");
 
   const stripepublish =
@@ -24,15 +26,16 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5656/api/products/showcart", {
+      .get("http://localhost:4545/api/products/showcart", {
         headers: { Authorization: ` ${token}` },
       })
       .then((response) => {
         setCheckout(response?.data?.products);
-      }).catch((error)=>{
-        console.log(error.response.data.message)
+      })
+      .catch((error) => {
+        console.log(error);
       });
-  }, []);
+  }, [token]);
 
   const totalPrice = checkout?.reduce((counttotal, item) => {
     return counttotal + item.quantity * item.price;
@@ -40,32 +43,31 @@ const Checkout = () => {
 
   const payment = async () => {
     const stripe = await loadStripe(stripepublish);
-  
+   
     const body = {
       products: checkout,
     };
     try {
       const response = await axios.post(
-        "http://localhost:5656/api/products/payment",
+        "http://localhost:4545/api/products/payment",
         body,
         {
           headers: { Authorization: ` ${token}` },
         }
       );
-  
+
       const session = response.data;
+      
       const result = await stripe.redirectToCheckout({
         sessionId: session.id,
       });
-      if (!result) {
-        console.error("Error redirecting to checkout");
-      }
+      console.log(result, "resiljjhsgfdhd");
+
     
     } catch (error) {
-      console.error("Payment error:", error);
+      console.error("Payment error", error);
     }
   };
-  
 
   return (
     <div>
@@ -76,7 +78,7 @@ const Checkout = () => {
             fontSize: "20px",
             marginLeft: "150px",
             marginTop: "10px",
-            WebkitTextStroke: "medium"
+            WebkitTextStroke: "medium",
           }}
           className="text-gray-900 bg-gradient-to-r from-red-400 via-red-400 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           onClick={() => Navigate("/cart")}
@@ -90,7 +92,7 @@ const Checkout = () => {
             // fontWeight: "bold",
             fontSize: "40px",
             textDecoration: "underline",
-             WebkitTextStroke: "medium"
+            WebkitTextStroke: "medium",
           }}
         >
           ORDER DETAIL
@@ -101,16 +103,40 @@ const Checkout = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontWeight: "bold", fontSize: "20px"  , WebkitTextStroke: "medium"  }}>
+              <TableCell
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  WebkitTextStroke: "medium",
+                }}
+              >
                 TITLE
               </TableCell>
-              <TableCell style={{ fontWeight: "bold", fontSize: "20px" , WebkitTextStroke: "medium"}}>
+              <TableCell
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  WebkitTextStroke: "medium",
+                }}
+              >
                 DESCRIPTION
               </TableCell>
-              <TableCell style={{ fontWeight: "bold", fontSize: "20px" , WebkitTextStroke: "medium" }}>
+              <TableCell
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  WebkitTextStroke: "medium",
+                }}
+              >
                 QUANTITY
               </TableCell>
-              <TableCell style={{ fontWeight: "bold", fontSize: "20px" , WebkitTextStroke: "medium" }}>
+              <TableCell
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  WebkitTextStroke: "medium",
+                }}
+              >
                 PRICE
               </TableCell>
             </TableRow>
@@ -120,6 +146,18 @@ const Checkout = () => {
               <TableRow key={i}>
                 <TableCell>{value?.title}</TableCell>
                 <TableCell>{value?.description}</TableCell>
+                {/* <TableCell>
+                              <img
+                                src={`${url}/${value.image}`}
+                                alt={value.title}
+                                style={{
+                                  maxWidth: "300px",
+                                  maxHeight: "250px",
+                                  borderRadius: "10px",
+                                }}
+                                className="mb-5 "
+                              />
+                            </TableCell> */}
                 <TableCell>
                   {value?.quantity} x ${value.price?.toFixed(2)}
                 </TableCell>
@@ -142,7 +180,7 @@ const Checkout = () => {
             SUBTOTAL :-${totalPrice?.toFixed(2)}
           </h1>
           <button
-            style={{ marginLeft: "1700px" ,WebkitTextStroke: "medium" }}
+            style={{ marginLeft: "1700px", WebkitTextStroke: "medium" }}
             type="button"
             onClick={payment}
             className="text-gray-900 bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"

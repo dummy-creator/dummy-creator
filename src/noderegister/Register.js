@@ -32,7 +32,7 @@ const Register = () => {
     formData.append("password",values.password)
     formData.append("image", images);
     axios
-      .post("http://localhost:5656/api/products/usersave", formData)
+      .post("http://localhost:4545/api/products/usersave", formData)
       .then((response) => {
         console.log(response.data.user);
         toast.success(response?.data?.message);
@@ -73,7 +73,7 @@ const Register = () => {
           validationSchema={validation}
         >
           <Form>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} style={{marginTop:"40px"}}>
               <Table sx={{ minWidth: 100 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>

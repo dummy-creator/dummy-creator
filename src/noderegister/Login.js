@@ -21,7 +21,7 @@ const Login = () => {
     }
     const handleSubmit = (values, { resetForm }) => {
         axios
-            .post("http://localhost:5656/api/products/login", {
+            .post("http://localhost:4545/api/products/login", {
                 email: values?.email,
                 password: values?.password,
             })
@@ -45,16 +45,16 @@ const Login = () => {
     // });
     return (
         <center>
-
-            <div>
+ <h1 className="bg-clip-text font-extrabold text-4xl" style={{marginTop:"100px"}} >
+                                Sign in to your account
+                            </h1>
+            <div style={{marginTop:"30px"}}>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit} >
 
 
                     <Form>
                         <TableContainer component={Paper}>
-                            <h1 className="bg-clip-text font-extrabold text-4xl text-transparent bg-gradient-to-b from-orange-300 to-blue-700">
-                                Sign in to your account
-                            </h1>
+                           
                             <Table sx={{ minWidth: 100 }} aria-label="simple table">
                                 <TableHead >
                                     <div
@@ -77,9 +77,13 @@ const Login = () => {
                                             <TableCell colSpan={2}>
                                                 <Button type="submit" variant='contained' startIcon={<SaveIcon />}>
                                                     Submit
+                                                </Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <Button type="submit" variant='contained' onClick={()=>navigate("/register")}>
+                                                    Register
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
+                                        
                                     </div>
                                 </TableHead>
                             </Table>

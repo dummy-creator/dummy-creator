@@ -9,13 +9,13 @@ const Success = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5656/api/products/success/${session_id}`, {
+      .get(`http://localhost:4545/api/products/success/${session_id}`, {
         headers: { Authorization: ` ${token}` },
       })
       .then((response) => {
         setError(response.data.message);
       });
-  }, [session_id]);
+  }, [session_id,token]);
 
   return (
     <div>

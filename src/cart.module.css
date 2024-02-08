@@ -1,0 +1,125 @@
+.heading {
+  font-size: 40px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: beige;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.background {
+  background-image: url("https://png.pngtree.com/background/20230526/original/pngtree-neon-shopping-cart-on-a-black-background-picture-image_2751342.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.orderbackground1 {
+  background-image: url("https://as1.ftcdn.net/v2/jpg/04/55/43/70/1000_F_455437052_2mbbrij1ylzEdr6Fqh3mnTwAX5Oi4Hkb.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.cartbackground {
+  background-image: url("https://img.freepik.com/free-photo/arrangement-black-friday-shopping-carts-with-copy-space_23-2148667047.jpg");
+  height: 100vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.productbackground {
+  background-image: url("https://img.freepik.com/free-photo/shopping-cart-with-wooden-elements_23-2148879396.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.userbackground {
+  background-image: url("https://as1.ftcdn.net/v2/jpg/06/89/23/46/1000_F_689234644_tprTeWMGtvSNL9nywDGZxchYkeFW5Kq2.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+.profilebackground {
+  background-image: url("https://img.freepik.com/free-vector/gradient-blue-background-with-bokeh-effect_23-2148362565.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.card {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  width: 300px;
+  height: 550px;
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.157);
+  padding: 10px;
+  text-align: center;
+  color: aliceblue;
+}
+
+.ordercard {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.157);
+  padding: 10px;
+  color: aliceblue;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  margin-left: 75px;
+}
+.image1 {
+  height: 50px;
+  width: 50px;
+  margin-left: 75px;
+}
+.video {
+  height: 142px;
+  width: 180px;
+  margin-left: 75px;
+}
+.video1 {
+  height: 60px;
+  width: 60px;
+  /* margin-left: 75px; */
+}
+.container {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 110px;
+}
+.cartcontainer {
+  width: 700px;
+  display: inline-grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+}
+.singleproductcontainer {
+  width: 500px;
+  display: inline-grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+}
+.quantity {
+  color: black;
+}
+.des {
+  white-space: nowrap;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  text-align: center;
+}
