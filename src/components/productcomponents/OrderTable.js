@@ -3,6 +3,7 @@ import {
   IconButton,
   Pagination,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -17,8 +18,9 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import React, { useEffect, useState } from "react";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
+import style from "../../cart.module.css";
 
-const Orderdetails = () => {
+const OrderTable = () => {
   const token = localStorage.getItem("token");
   const [order, setOrder] = useState();
   const [showdetail, setDetails] = useState();
@@ -28,27 +30,28 @@ const Orderdetails = () => {
   const [page, setPage] = useState(1);
 
   const [row, setRow] = useState();
+  const productsdetail = () => {
+    axios
+      .get(`http://localhost:4545/api/products/pagination?page=${page}`, {
+        headers: { Authorization: ` ${token}` },
+      })
+      .then((response) => {
+        setOrder(response.data.orders);
+        setRow(response.data.totalpage);
+      });
+  };
+
+  const user = () => {
+    axios
+      .get("http://localhost:4545/api/products/user", {
+        headers: { Authorization: ` ${token}` },
+      })
+      .then((response) => {
+        setUser(response?.data.newuser);
+      });
+  };
 
   useEffect(() => {
-    const productsdetail = () => {
-      axios
-        .get(`http://localhost:4545/api/products/pagination?page=${page}`, {
-          headers: { Authorization: ` ${token}` },
-        })
-        .then((response) => {
-          setOrder(response.data.orders);
-          setRow(response.data.totalpage);
-        });
-    };
-    const user = () => {
-      axios
-        .get("http://localhost:4545/api/products/user", {
-          headers: { Authorization: ` ${token}` },
-        })
-        .then((response) => {
-          setUser(response?.data.newuser);
-        });
-    };
     productsdetail();
     user();
   }, [token, row, page]);
@@ -76,102 +79,105 @@ const Orderdetails = () => {
 
   return (
     <div>
-      <center>
-        <h1
-          style={{
-            fontSize: "40px",
-            textDecoration: "underline",
-            WebkitTextStroke: "medium",
-          }}
-        >
-          Order Details Table
-        </h1>
+      <TableContainer className={style.background}>
+        <center>
+          <h1 className={style.heading}>Order Details Table</h1>
 
-        <div>
-          <TextField
-            style={{
-              backgroundColor: "cyan",
-              color: "black",
-              marginBottom: "40px",
-              marginTop: "60px",
-            }}
-            type="text"
-            placeholder="Search..."
-            label="SEARCH HERE"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="rounded-lg"
-          />
-        </div>
-        <br />
-      </center>
-      <TableContainer>
-        <Table className="border-4 bg-sky-400 border-x-4 border-indigo-800 ">
-          <TableHead>
-            <TableRow
+          <div>
+            <TextField
               style={{
-                fontWeight: "bold",
-                fontSize: "20px",
-                WebkitTextStroke: "medium",
+                backgroundColor: "cyan",
+                color: "black",
+                marginBottom: "40px",
+                marginTop: "60px",
               }}
-            >
-              <TableCell>ID</TableCell>
-              <TableCell>USERNAME</TableCell>
-              <TableCell>ADDRESS</TableCell>
-              <TableCell>TITLE</TableCell>
-              <TableCell>ACTION</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {order
-              ?.filter((value) =>
-                value.details?.some((item) =>
-                  item.product.title
-                    .toLowerCase()
-                    .includes(searchQuery.toLowerCase())
+              type="text"
+              placeholder="Search..."
+              label="SEARCH HERE"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="rounded-lg"
+            />
+          </div>
+          <br />
+        </center>
+        <div style={{ width: "75%", marginLeft: "300px" }}>
+          <Table className="border-4 bg-sky-400 border-x-4 border-indigo-800 ">
+            <TableHead>
+              <TableRow
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  WebkitTextStroke: "medium",
+                }}
+              >
+                <TableCell>ID</TableCell>
+                <TableCell>USERNAME</TableCell>
+                <TableCell>ADDRESS</TableCell>
+                <TableCell>TITLE</TableCell>
+                <TableCell>ACTION</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {order
+                ?.filter((value) =>
+                  value.details?.some((item) =>
+                    item.product.title
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase())
+                  )
                 )
-              )
-              .map((value, i) => (
-                <TableRow key={i}>
-                  <TableCell>{value?._id}</TableCell>
-                  <TableCell>{users.username}</TableCell>
-                  <TableCell>
-                    {value.address.city}, {value.address.state},{" "}
-                    {value.address.country}
-                    {value.address.line1}, {value.address.line2}{" "}
-                    {value.address.postal_code}
-                  </TableCell>
-                  <TableCell>
-                    {value.details?.map((item) => (
-                      <div>{item.product.title}</div>
-                    ))}
-                  </TableCell>
-                  <TableCell>
-                    <button
-                      type="button"
-                      onClick={() => deletedata(value?._id)}
-                    >
-                      <DeleteForeverIcon />
-                    </button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <IconButton
-                      aria-label="view"
-                      style={{ color: "purple" }}
-                      onClick={() => view(value?._id)}
-                    >
-                      {<VisibilityIcon />}
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+                .map((value, i) => (
+                  <TableRow key={i}>
+                    <TableCell>{value?._id}</TableCell>
+                    <TableCell>{users.username}</TableCell>
+                    <TableCell>
+                      {value.address.city}, {value.address.state},{" "}
+                      {value.address.country}
+                      {value.address.line1}, {value.address.line2}{" "}
+                      {value.address.postal_code}
+                    </TableCell>
+                    <TableCell>
+                      {value.details?.map((item) => (
+                        <div>{item.product.title}</div>
+                      ))}
+                    </TableCell>
+                    <TableCell>
+                      <button
+                        type="button"
+                        onClick={() => deletedata(value?._id)}
+                      >
+                        <DeleteForeverIcon />
+                      </button>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <IconButton
+                        aria-label="view"
+                        style={{ color: "purple" }}
+                        onClick={() => view(value?._id)}
+                      >
+                        {<VisibilityIcon />}
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
+        <Stack spacing={2}>
+        <Pagination
+          page={page}
+          count={row}
+          onChange={handlechaneg}
+          // className={style.paginationbackground}
+          style={{ marginLeft: "300px" ,marginRight:"1250px",backgroundColor:"white",marginTop:"10px",borderRadius:"45px"}}
+        />
+        </Stack>
       </TableContainer>
-      <Pagination page={page} count={row} onChange={handlechaneg} />
-      <Dialog open={views} className="border border-indigo-600">
+      <Dialog open={views} className="border border-indigo-600"  style={{borderRadius:"20px"}} >
         <TableContainer component={Paper}>
           {showdetail?.map((value) => (
-            <Table sx={{ minWidth: 350 }} aria-label="simple table">
+            <div>
+            <Table sx={{ minWidth: 350 }} aria-label="simple table" >
               <TableHead>
                 <TableRow className="border-8 bg-violet-400 border-x-4 border-indigo-800 ">
                   <TableRow>
@@ -246,6 +252,7 @@ const Orderdetails = () => {
                 </TableRow>
               </TableHead>
             </Table>
+            </div>
           ))}
         </TableContainer>
       </Dialog>
@@ -253,4 +260,4 @@ const Orderdetails = () => {
   );
 };
 
-export default Orderdetails;
+export default OrderTable;

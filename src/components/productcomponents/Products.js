@@ -8,14 +8,14 @@ import {
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import style from "../cart.module.css";
-import "../App.css";
+import style from "../../cart.module.css";
+
 import Carousel from "react-material-ui-carousel";
-// import { Carousel } from 'react-responsive-carousel';
-const Showproducts = () => {
+
+const Products = () => {
   const navigate = useNavigate();
   // const url = "http://localhost:4545/api/products/images";
   const initialValue = {
@@ -33,7 +33,7 @@ const Showproducts = () => {
   const [limit, setlimt] = useState(6);
   const [page, setPage] = useState();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     axios
       .get(
         `http://localhost:4545/api/products/allproducts/?page=${page}&limit=${limit}`,
@@ -43,8 +43,6 @@ const Showproducts = () => {
       )
       .then((response) => {
         setShow(response?.data?.product);
-        console.log(response?.data?.product);
-
         setPage(response.data.currentPage);
       });
   }, [limit, page, token]);
@@ -67,12 +65,12 @@ const Showproducts = () => {
       });
   };
 
-  const logout = () => {
-    localStorage.clear("token");
-    setTimeout(() => {
-      navigate("/login");
-    }, 500);
-  };
+  // const logout = () => {
+  //   localStorage.clear("token");
+  //   setTimeout(() => {
+  //     navigate("/login");
+  //   }, 500);
+  // };
 
   const loadMoreItems = () => {
     setlimt(limit + 6);
@@ -89,42 +87,24 @@ const Showproducts = () => {
                   <center>
                     <h1
                       className={style.heading}
-                      // style={{
-                      //   fontSize: "40px",
-                      //   textDecoration: "underline",
-                      //   WebkitTextStroke: "medium",
-                      // }}
+                    
                     >
                       PRODUCTS
                     </h1>
                   </center>
-                  <div
-                    style={{
-                      marginLeft: "10px",
-                      marginTop: "10px",
-                      display: "flex",
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={logout}
-                      className=" px-6	text-white bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
-                      LOGOUT
-                    </button>
-                  </div>
-                  <div className={style.container}>
+                  
+                  <div className={style.productcontainer}>
                     {show?.map((value, i) => (
                       <div className={style.card}>
                         <button
                           type="button"
                           onClick={() =>
-                            navigate(`/show/singleproduct/${value?._id}`)
+                            navigate(`/show/buy/${value?._id}`)
                           }
                         >
                           <TableRow key={i}>
                             <Typography>
-                              {(value?.videos && value.image && (
+                              {(value?.video && value.image && (
                                 <Carousel autoPlay>
                                   {value?.image.map((data) => (
                                     <img
@@ -139,12 +119,14 @@ const Showproducts = () => {
                                   className={style.image}
                                 /> */}
 
-                                  {value?.videos && (
+                                  {value?.video && (
                                     <video
                                       width="400"
-                                      src={value?.videos || null}
+                                      src={value?.video || null}
                                       className={style.image}
                                       controls
+                                      autoPlay="autoplay"
+                                      loop
                                     />
                                   )}
                                 </Carousel>
@@ -236,4 +218,4 @@ const Showproducts = () => {
   );
 };
 
-export default Showproducts;
+export default Products;

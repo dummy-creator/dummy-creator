@@ -12,9 +12,9 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import style from "../cart.module.css";
+import style from "../../cart.module.css";
 
-const Productable = () => {
+const   AdminSetting = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [prodcutDetail, setProductDetail] = useState();
@@ -43,10 +43,10 @@ const Productable = () => {
   return (
     <div>
       {" "}
-      <TableContainer className={style.productbackground}>
+      <TableContainer className={style.background}>
         <div
           style={{
-            marginLeft: "100px",
+            marginLeft: "375px",
             marginTop: "30px",
             display: "flex",
             gap: "30px",
@@ -76,10 +76,10 @@ const Productable = () => {
           </Button>
         </div>
 
-        <div style={{ marginLeft: "90px", marginRight: "90px" }}>
+        <div style={{ marginLeft: "370px", marginRight: "90px" }}>
           <Table
             style={{ marginTop: "30px" }}
-            className={style.ordercard}
+            className={style.settingcart}
           >
             <TableHead>
               <TableRow
@@ -127,7 +127,7 @@ const Productable = () => {
                 ))}
             </TableBody>
           </Table>
-          <div>
+        
             <Pagination
               defaultPage={1}
               page={page}
@@ -135,13 +135,13 @@ const Productable = () => {
               shape="rounded"
               onChange={handleChange}
               color="secondary"
-              style={{ margin: "10px" }}
+              className={style.paginationbackground}
             />
-          </div>
+          
         </div>
       </TableContainer>
     </div>
   );
 };
 
-export default Productable;
+export default AdminSetting;

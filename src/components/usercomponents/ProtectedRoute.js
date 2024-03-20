@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "../productitem/Header";
+// import Header from "../Header";
 
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../productcomponents/Header";
 
-const Protect = (props) => {
+const ProtectedRoute = (props) => {
   const [verified, setVerified] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const location = useLocation();
@@ -64,8 +65,11 @@ const Protect = (props) => {
   } else {
     if (verified && userRole === "user") {
       if (
-        location.pathname === "/addproducts" ||
-        location.pathname === "/alluser"
+        location.pathname === "/setting" 
+        ||
+        location.pathname === "/alluser"||
+        location.pathname === "/addproducts"||
+        location.pathname === "/adduser"
       ) {
         return navigate("/show");
       } else {
@@ -84,4 +88,4 @@ const Protect = (props) => {
   }
 };
 
-export default Protect;
+export default ProtectedRoute;

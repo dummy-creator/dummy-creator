@@ -13,9 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { Delete } from "@mui/icons-material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
-import style from "../cart.module.css";
+import style from "../../cart.module.css";
 
-const Showcart = () => {
+const AddToCart = () => {
   const Navigate = useNavigate();
   const initialValue = {
     quantity: "",
@@ -83,17 +83,13 @@ const Showcart = () => {
 
   return (
     <>
-      {cart?.length > 0 ? (
-        <Formik initialValues={initialValue}>
-          <Form>
-            <TableContainer component={Paper} className={style.cartbackground}>
+      <TableContainer component={Paper} className={style.background}>
+        {cart?.length > 0 ? (
+          <Formik initialValues={initialValue}>
+            <Form>
               <div>
                 <center>
-                  <h1
-                   className={style.heading}
-                  >
-                    CART
-                  </h1>
+                  <h1 className={style.heading}>CART</h1>
                 </center>
                 <div
                   style={{
@@ -113,7 +109,7 @@ const Showcart = () => {
                 <div
                   style={{
                     display: "flex",
-                    marginLeft: "215px",
+                    marginLeft: "350px",
                     marginTop: "95px",
                   }}
                 >
@@ -139,7 +135,9 @@ const Showcart = () => {
                           <div>
                             <TableRow>
                               <TableCell>
-                                <Typography className={style.title}>Title:-{value.title}</Typography>
+                                <Typography className={style.title}>
+                                  Title:-{value.title}
+                                </Typography>
                               </TableCell>
                             </TableRow>
                             <TableRow>
@@ -232,20 +230,20 @@ const Showcart = () => {
                       WebkitTextStroke: "medium",
                     }}
                     className="text-gray-900 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-3 py-1"
-                    onClick={() => Navigate("/checkout")}
+                    onClick={() => Navigate("/payment")}
                   >
                     CHECKOUT <KeyboardTabIcon />
                   </button>
                 </div>
               </div>
-            </TableContainer>
-          </Form>
-        </Formik>
-      ) : (
-        "error"
-      )}
+            </Form>
+          </Formik>
+        ) : (
+          "error"
+        )}
+      </TableContainer>
     </>
   );
 };
 
-export default Showcart;
+export default AddToCart;

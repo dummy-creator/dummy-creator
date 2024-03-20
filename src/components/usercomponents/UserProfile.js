@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  TableCell,
-  TableRow,
-  TableContainer,
-} from "@mui/material";
+import { Typography, TableCell, TableRow, TableContainer } from "@mui/material";
 
 import axios from "axios";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import style from "./cart.module.css";
+import style from "../../cart.module.css";
 
-const Dummy = () => {
+const UserProfile = () => {
   const Navigate = useNavigate();
   const initialValue = {
     username: "",
@@ -21,23 +16,25 @@ const Dummy = () => {
     image: "",
   };
   const [detail, setDetail] = useState(initialValue);
+  console.log(detail);
   const token = localStorage.getItem("token");
   const { id } = useParams();
   const url = "http://localhost:4545/api/products/images";
- 
+  const getUsersDetail = () => {
+    axios
+      .get("http://localhost:4545/api/products/user", {
+        headers: { Authorization: ` ${token}` },
+      })
+      .then((response) => {
+        setDetail(response?.data.newuser);
+        console.log(response?.data.newuser);
+
+        // toast.success(response?.data?.message);
+      });
+  };
   useEffect(() => {
-    const getUsersDetail = () => {
-      axios
-        .get("http://localhost:4545/api/products/user", {
-          headers: { Authorization: ` ${token}` },
-        })
-        .then((response) => {
-          setDetail(response?.data.newuser);
-          // toast.success(response?.data?.message);
-        });
-    };
     getUsersDetail();
-  }, [token,detail]);
+  }, [token]);
 
   const updateuser = (e) => {
     const files = e.target.files[0];
@@ -49,7 +46,7 @@ const Dummy = () => {
       })
       .then((response) => {
         setDetail(response?.data?.updatedUser);
-        // getUsersDetail();
+        getUsersDetail();
         toast.success(response?.data?.message);
       })
       .catch((error) => {
@@ -70,23 +67,19 @@ const Dummy = () => {
         <Outlet />
       ) : (
         <center>
-          <TableContainer className={style.profilebackground}>
-            <div style={{ marginLeft: "800px", marginTop: "10px" }}>
+          <TableContainer className={style.background}>
+            <h1
+             className={style.heading}
+            >
+              PROFILE
+            </h1>
+            <div>
               {/* <center> */}
-              <h1
-                style={{
-                  fontSize: "40px",
-                  textDecoration: "underline",
-                  WebkitTextStroke: "medium",
-                }}
-              >
-                PROFILE
-              </h1>
 
-              <div className={style.container}>
+              <div>
                 <div
                   // style={{ display: "flex", marginLeft: "780px" }}
-                  className={style.card}
+                  className={style.profilecard}
                 >
                   {/* <Card
                   sx={{
@@ -97,7 +90,7 @@ const Dummy = () => {
                 >
                   <CardContent> */}
                   <Typography>
-                    <div style={{ marginBottom: "20px" }}>
+                    <div style={{ marginBottom: "20px"}}>
                       <label
                         htmlFor="image"
                         className=" px-6	text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -188,4 +181,4 @@ const Dummy = () => {
   );
 };
 
-export default Dummy;
+export default UserProfile;

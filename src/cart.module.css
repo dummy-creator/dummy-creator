@@ -9,7 +9,7 @@
 
 .background {
   background-image: url("https://png.pngtree.com/background/20230526/original/pngtree-neon-shopping-cart-on-a-black-background-picture-image_2751342.jpg");
-  height: 90vh;
+  height: 100vh;
   background-repeat: no-repeat;
   font-size: 50px;
   background-size: cover;
@@ -17,7 +17,7 @@
 
 .orderbackground1 {
   background-image: url("https://as1.ftcdn.net/v2/jpg/04/55/43/70/1000_F_455437052_2mbbrij1ylzEdr6Fqh3mnTwAX5Oi4Hkb.jpg");
-  height: 90vh;
+  height: 100vh;
   background-repeat: no-repeat;
   font-size: 50px;
   background-size: cover;
@@ -33,7 +33,7 @@
 
 .productbackground {
   background-image: url("https://img.freepik.com/free-photo/shopping-cart-with-wooden-elements_23-2148879396.jpg");
-  height: 90vh;
+  height: 100vh;
   background-repeat: no-repeat;
   font-size: 50px;
   background-size: cover;
@@ -41,14 +41,22 @@
 
 .userbackground {
   background-image: url("https://as1.ftcdn.net/v2/jpg/06/89/23/46/1000_F_689234644_tprTeWMGtvSNL9nywDGZxchYkeFW5Kq2.jpg");
-  height: 90vh;
+  height: 100vh;
   background-repeat: no-repeat;
   font-size: 50px;
   background-size: cover;
 }
 .profilebackground {
   background-image: url("https://img.freepik.com/free-vector/gradient-blue-background-with-bokeh-effect_23-2148362565.jpg");
-  height: 90vh;
+  height: 100vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.chatbackgroud {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdPv-sN4F5NnK2usuG_Dv2qYR0lhvyD1-f4YLrKjV5PzR4F3GNR8dXxtJTP9yX_ZMOs5c&usqp=CAU");
+  height: 100vh;
   background-repeat: no-repeat;
   font-size: 50px;
   background-size: cover;
@@ -65,25 +73,63 @@
   color: aliceblue;
 }
 
+.profilecard {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  width: 300px;
+  height: 420px;
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.157);
+  padding: 10px;
+  text-align: center;
+  color: aliceblue;
+  margin-top: 120px;
+}
 .ordercard {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.155);
+  padding: 10px;
+  color: aliceblue;
+  margin-left: "100px";
+}
+
+.settingcart {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.612);
+  padding: 10px;
+  color: aliceblue;
+}
+
+.paginationbackground {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.612);
+  padding: 10px;
+  color: aliceblue;
+  margin: 10px;
+  border-radius: 60px;
+}
+
+.userdetails {
   box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
   backdrop-filter: blur(14px);
   background-color: rgba(183, 171, 171, 0.157);
   padding: 10px;
   color: aliceblue;
+  width: 600px;
 }
-
 .image {
   height: 150px;
   width: 150px;
-  margin-left: 75px;
+  margin-left: 65px;
 }
 .image1 {
   height: 50px;
   width: 50px;
   margin-left: 75px;
 }
-.video {
+.videos {
   height: 142px;
   width: 180px;
   margin-left: 75px;
@@ -98,17 +144,31 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 110px;
 }
+.container1 {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 110px;
+  margin-left: 720px;
+}
 .cartcontainer {
   width: 700px;
   display: inline-grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 15px;
 }
+.productcontainer {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 110px;
+  margin-left: 280px;
+  margin-top: 70px;
+}
 .singleproductcontainer {
   width: 500px;
   display: inline-grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 15px;
+  margin-left: 110px;
 }
 .quantity {
   color: black;
@@ -122,4 +182,114 @@
 
 .title {
   text-align: center;
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+  background-color: #e7f2f8;
+  margin-left: "200px";
+}
+
+.chartimage {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_-TfaihyFJMeMC1SshxoNv04AJXbo2skogdWLzRZOOw0WFM4aKD7H9gEB9qTd8bKKq_g&usqp=CAU");
+  height: 100vh;
+  background-repeat: no-repeat;
+  font-size: 50px;
+  background-size: cover;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: indigo;
+  color: white;
+}
+
+.table {
+  min-width: "650px";
+}
+.chatSection {
+  width: "50%";
+  height: "80vh";
+}
+.headBG {
+  background-color: "#e0e0e0";
+}
+.borderRight500 {
+  border-right: "1px solid #e0e0e0";
+}
+.messageArea {
+  height: "70vh";
+  overflow: auto;
+}
+.scrollbar {
+  display: block;
+  width: 40em;
+  overflow: auto;
+  height: 350px;
+  padding: 1em;
+  margin: 1em auto;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #000;
+}
+
+.showchatcard {
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  backdrop-filter: blur(14px);
+  background-color: rgba(183, 171, 171, 0.155);
+  padding: 10px;
+  color: aliceblue;
+  margin-left: "100px";
+}
+
+.showchatcontainer {
+  width: 700px;
+  display: inline-grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+}
+
+.chatcontainer {
+  width: 250px;
+  display: inline-grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 15px;
+}
+.chatcard {
+  box-shadow: 0 15px 25px rgb(251 239 250 / 0%);
+  background-color: rgb(183 173 173 / 32%);
+  padding: 10px;
+  color: rgb(19 30 40);
+}
+.chat-container {
+  width: 300px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.message-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.message {
+  background-color: #f9f9f9;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: calc(100% - 70px);
+  padding: 5px;
+}
+
+.send-button {
+  width: 70px;
+  padding: 5px;
 }

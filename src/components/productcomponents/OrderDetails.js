@@ -9,14 +9,23 @@ import {
 } from "@mui/material";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import { useNavigate } from "react-router-dom";
-import style from "../cart.module.css";
+import style from "../../cart.module.css";
 
-const Order = () => {
+
+const OrderDetails = () => {
   const [success, setSuccess] = useState();
   const navigate = useNavigate();
   // const url = "http://localhost:4545/api/products/images";
   const token = localStorage.getItem("token");
 
+  // const singleorder=()=>{
+  //   axios
+  //   .get("http://localhost:4545/api/products/singleordersuccess",{
+  //     headers: { Authorization: ` ${token}` },
+  //   }).then((response)=>{
+  //     console.log(response.data.)
+  //   })
+  // }
   useEffect(() => {
     axios
       .get("http://localhost:4545/api/products/details", {
@@ -29,14 +38,14 @@ const Order = () => {
 
   return (
     <>
-      <TableContainer component={Paper} className={style.orderbackground1}>
+      <TableContainer component={Paper} className={style.background}>
         <center>
           <h1
             className={style.heading}
           >
             ORDER
             <IconButton
-              onClick={() => navigate("/orderdetail")}
+              onClick={() => navigate("/ordertable")}
               style={{ marginLeft: "50px", color: "red" }}
             >
               <RedeemIcon />
@@ -44,7 +53,7 @@ const Order = () => {
           </h1>
         </center>
         <div
-          style={{ display: "flex", marginLeft: "215px", marginTop: "95px" }}
+          style={{ display: "flex", marginLeft: "450px", marginTop: "95px" }}
         >
           <div className={style.cartcontainer}>
             {success?.map((value, i) => {
@@ -105,4 +114,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default OrderDetails;

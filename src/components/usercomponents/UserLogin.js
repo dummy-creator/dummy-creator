@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { toast } from 'react-toastify';
 
-const Login = () => {
+const UserLogin = () => {
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
@@ -97,4 +97,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default UserLogin;

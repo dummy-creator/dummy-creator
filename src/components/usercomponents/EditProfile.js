@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Edits = () => {
+const EditProfile = () => {
   const initialValue = {
     username: "",
     firstname: "",
@@ -97,13 +97,13 @@ const Edits = () => {
           <TableBody>
             <div style={{ margin: "auto", width: "25%" }}>
               <TableRow>
-                <TableCell className="">Id</TableCell>
+                <TableCell style={{ fontWeight: "bold" }} >Id</TableCell>
                 <TableCell>
                   <input type="text" name="_id" value={update._id} disabled />
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="">Profile </TableCell>
+                <TableCell style={{ fontWeight: "bold" }}>Profile </TableCell>
                 <TableCell>
                   <input
                     type="file"
@@ -177,4 +177,4 @@ const Edits = () => {
   );
 };
 
-export default Edits;
+export default EditProfile;

@@ -1,24 +1,26 @@
-import {  Card, CardContent, Table, TableCell } from "@mui/material";
+import { Card, CardContent, Table, TableCell } from "@mui/material";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
-// import Paper from "@mui/material/Paper";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-// import * as Yup from 'yup';
-// import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import style from "../../cart.module.css";
 
-const Product = () => {
+const AddProducts = () => {
   const Navigate = useNavigate();
   const [imges, setImages] = useState();
+  const [videos, setVideos] = useState();
+
   const initialValue = {
     title: "",
     description: "",
     stock: "",
     price: "",
+    quantity: "",
     image: "",
+    video: "",
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -27,7 +29,9 @@ const Product = () => {
     formData.append("description", values.description);
     formData.append("stock", values.stock);
     formData.append("price", values.price);
+    formData.append("video", videos);
     formData.append("image", imges);
+
     resetForm();
 
     axios
@@ -38,28 +42,32 @@ const Product = () => {
         Navigate("/show");
       })
       .catch((error) => {
-        console.error(error.response.data.message);
+        console.error(error?.response?.data?.message);
       });
   };
 
+  
+  
   return (
     <>
       <center>
-        <h1
-          style={{
-            fontSize: "40px",
-            textDecoration: "underline",
-            WebkitTextStroke: "medium",
-            marginTop: '15px'
-          }}
-        >
-          ADD PRODUCTS
-        </h1>
-
         <Formik initialValues={initialValue} onSubmit={handleSubmit}>
           <Form>
             <center>
-              <TableContainer>
+              <TableContainer className={style.background}>
+                <h1
+                  // style={{
+                  //   fontSize: "40px",
+                  //   textDecoration: "underline",
+                  //   WebkitTextStroke: "medium",
+                  //   marginTop: "15px",
+                  // }}
+               className={style.heading}
+                  
+                >
+                  ADD PRODUCTS
+                </h1>
+
                 <Table sx={{ minWidth: 100 }} aria-label="simple table">
                   <div style={{ marginLeft: "10px", marginTop: "85px" }}>
                     <div className="grid w-max h-max gap-20 max-sm:grid-cols-1">
@@ -124,6 +132,18 @@ const Product = () => {
                                     <ErrorMessage name="price" />
                                   </TableCell>
                                 </TableRow>
+                                {/* <TableRow>
+                                  <TableCell> quantity</TableCell>
+                                  <TableCell>
+                                    {" "}
+                                    <Field
+                                      type="number"
+                                      name="quantity"
+                                      placeholder="quantity"
+                                    />
+                                    <ErrorMessage name="quantity" />
+                                  </TableCell>
+                                </TableRow> */}
                                 <TableRow>
                                   <TableCell> Image</TableCell>
                                   <TableCell colSpan={2}>
@@ -136,10 +156,22 @@ const Product = () => {
                                     />
                                   </TableCell>
                                 </TableRow>
+                                <TableRow>
+                                  <TableCell> Video</TableCell>
+                                  <TableCell colSpan={2}>
+                                    <input
+                                      type="file"
+                                      name="videos"
+                                      onChange={(e) =>
+                                        setVideos(e.target.files[0])
+                                      }
+                                    />
+                                  </TableCell>
+                                </TableRow>
                                 <button
                                   type="button"
                                   className="text-gray-900 bg-gradient-to-r from-red-400 via-red-400 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                  onClick={() => Navigate("/productable")}
+                                  onClick={() => Navigate("/setting")}
                                 >
                                   CANCLE
                                 </button>
@@ -168,4 +200,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default AddProducts;

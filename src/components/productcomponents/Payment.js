@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import { loadStripe } from "@stripe/stripe-js";
-
-const Checkout = () => {
+import style from "../../cart.module.css"
+const Payment = () => {
   const Navigate = useNavigate();
   const [checkout, setCheckout] = useState();
 
@@ -71,7 +71,9 @@ const Checkout = () => {
 
   return (
     <div>
-      <div style={{ display: "flex" }}>
+    
+      <TableContainer className={style.background}>
+      <div style={{ display: "flex" ,marginLeft: '240px' }} >
         <button
           style={{
             fontWeight: "bold",
@@ -98,8 +100,8 @@ const Checkout = () => {
           ORDER DETAIL
         </h1>
       </div>
+<div style={{marginLeft: '300px',marginRight:"60px"}} className={style.settingcart}>
 
-      <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
@@ -168,19 +170,19 @@ const Checkout = () => {
             ))}
           </TableBody>
         </Table>
-        <div>
+        <div >
           <h1
             style={{
               fontWeight: "bold",
               fontSize: "20px",
-              marginLeft: "1660px",
+              marginLeft: "1235px",
               textDecoration: "underline",
             }}
           >
             SUBTOTAL :-${totalPrice?.toFixed(2)}
           </h1>
           <button
-            style={{ marginLeft: "1700px", WebkitTextStroke: "medium" }}
+            style={{ marginLeft: "1364px", WebkitTextStroke: "medium" }}
             type="button"
             onClick={payment}
             className="text-gray-900 bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -189,9 +191,12 @@ const Checkout = () => {
             <KeyboardTabIcon />
           </button>
         </div>
+      </div>
+      
       </TableContainer>
+     
     </div>
   );
 };
 
-export default Checkout;
+export default Payment;

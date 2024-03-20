@@ -18,7 +18,8 @@ code {
 input{
   border: 2px solid rgb(192, 196, 255);
   border-radius: 5px;
-  outline-color: blueviolet;
+  outline-color: rgb(145, 138, 151);
+  color: black;
 }
 ::-webkit-scrollbar{
   display: none;
